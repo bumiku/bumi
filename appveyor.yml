@@ -1,0 +1,23 @@
+version: 1.0.{build}
+services: mssql2016
+build:
+  publish_wap: true
+  publish_azure: true
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  parallel: true
+  verbosity: minimal
+artifacts:
+- path: wildcard
+  name: bumi
+deploy:
+- provider: Environment
+  name: bumi
+  on:
+    branch: hydroculture
+notifications:
+- provider: GitHubPullRequest
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: false
